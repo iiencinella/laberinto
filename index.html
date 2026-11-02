@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f4f0e6">
+  <title>Laberinto | Pulso y concentración</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <div class="page-shell">
+    <header class="topbar">
+      <a class="wordmark" href="index.html" aria-label="Laberinto, inicio">
+        <span class="brand-glyph" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span>LABERINTO</span>
+      </a>
+      <span class="topbar-note">COORDINACIÓN · ATENCIÓN · CONTROL</span>
+    </header>
+
+    <main>
+      <section class="intro" aria-labelledby="page-title">
+        <div>
+          <p class="eyebrow">UN EJERCICIO DE PRECISIÓN</p>
+          <h1 id="page-title">Encuentra la salida<span>.</span></h1>
+          <p class="intro-copy">Guía el punto desde la entrada hasta la meta. Cada nivel exige un pulso más firme.</p>
+        </div>
+        <div class="level-count" aria-label="Tres niveles">
+          <span id="level-count-current">01</span><span class="count-divider">/</span><span>03</span>
+        </div>
+      </section>
+
+      <div class="game-layout">
+        <section class="game-column" aria-label="Zona de juego">
+          <ol class="level-steps" aria-label="Progreso de niveles">
+            <li class="step is-current" data-step="0"><span>01</span><span class="step-name">Inicio</span></li>
+            <li class="step" data-step="1"><span>02</span><span class="step-name">Ritmo</span></li>
+            <li class="step" data-step="2"><span>03</span><span class="step-name">Precisión</span></li>
+          </ol>
+
+          <div class="board-heading">
+            <div>
+              <p class="eyebrow" id="level-eyebrow">NIVEL 01 · FÁCIL</p>
+              <h2 id="level-title">Primeros pasos</h2>
+            </div>
+            <span class="input-mode" id="input-mode">MOUSE</span>
+          </div>
+
+          <div class="maze-frame" id="maze-frame">
+            <canvas id="maze" aria-label="Laberinto interactivo. Mueve el puntero por los pasillos desde la entrada hasta la salida." role="img"></canvas>
+            <div class="maze-legend" aria-hidden="true">
+              <span><i class="legend-entry"></i> ENTRADA</span>
+              <span><i class="legend-exit"></i> SALIDA</span>
+            </div>
+          </div>
+
+          <div class="game-status" aria-live="polite" aria-atomic="true">
+            <span class="status-light" id="status-light"></span>
+            <p id="status-message">Lleva el cursor a la entrada para empezar.</p>
+          </div>
+
+          <div class="game-actions">
+            <button class="button button-secondary" id="restart-level" type="button">Reiniciar nivel</button>
+            <button class="button button-primary" id="next-level" type="button" hidden>Siguiente nivel <span aria-hidden="true">→</span></button>
+            <button class="button button-quiet" id="restart-game" type="button">Nuevo juego</button>
+          </div>
+        </section>
+
+        <aside class="side-column" aria-label="Estadísticas del juego">
+          <section class="score-panel" aria-label="Estadísticas del nivel">
+            <div class="timer-block">
+              <div class="panel-label"><span>TIEMPO DE NIVEL</span><span class="live-indicator" id="timer-indicator">EN ESPERA</span></div>
+              <time class="timer-value" id="timer" datetime="PT0S">00:00<span>.0</span></time>
+            </div>
+            <div class="score-divider"></div>
+            <div class="wall-score">
+              <div>
+                <p class="panel-label">TOQUES A LA PARED</p>
+                <p class="score-caption">Menos es mejor</p>
+              </div>
+              <strong id="wall-count">00</strong>
+            </div>
+            <div class="score-divider"></div>
+            <div class="level-times">
+              <p class="panel-label">TIEMPOS POR NIVEL</p>
+              <ul id="level-times-list">
+                <li><span>01 · Fácil</span><span>—</span></li>
+                <li><span>02 · Medio</span><span>—</span></li>
+                <li><span>03 · Difícil</span><span>—</span></li>
+              </ul>
+            </div>
+          </section>
+
+          <section class="records-panel" aria-labelledby="records-title">
+            <div class="records-heading">
+              <div>
+                <p class="eyebrow">LOCAL</p>
+                <h2 id="records-title">Registros</h2>
+              </div>
+              <span class="record-mark" aria-hidden="true">↗</span>
+            </div>
+            <ol class="records-list" id="records-list" aria-live="polite"></ol>
+            <p class="records-empty" id="records-empty">Tus partidas terminadas aparecerán aquí.</p>
+          </section>
+
+          <p class="privacy-note">Los resultados se guardan solo en este dispositivo.</p>
+        </aside>
+      </div>
+    </main>
+
+    <footer class="page-footer"><span>UNA PAUSA PARA ENFOCARSE</span><span>01 — 03</span></footer>
+  </div>
+
+  <dialog class="finish-dialog" id="finish-dialog" aria-labelledby="finish-title">
+    <form id="finish-form">
+      <p class="eyebrow">RECORRIDO COMPLETADO</p>
+      <h2 id="finish-title">Buen pulso.</h2>
+      <p class="dialog-copy">Tu tiempo total fue <strong id="final-time">00:00</strong>. Guarda el resultado con tu nombre.</p>
+      <label for="player-name">Nombre de usuario</label>
+      <input id="player-name" name="playerName" type="text" maxlength="32" autocomplete="name" required placeholder="Tu nombre">
+      <button class="button button-primary dialog-submit" type="submit">Guardar resultado</button>
+      <p class="dialog-feedback" id="dialog-feedback" aria-live="polite"></p>
+    </form>
+  </dialog>
+</body>
+</html>
